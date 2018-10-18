@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>if</title>
+    <script src="../../resource/vue.js"></script>
+</head>
+<body>
+<div id="root">
+    <div v-if="show">
+        {{m}}
+    </div>
+    <div v-show="show">
+        {{m}}
+    </div>
+    <div v-for="(item,index) of list" :key="index">{{item}}</div>
+    <button @click="cc">
+        toggle
+    </button>
+</div>
+
+<script>
+    new Vue({
+        el: '#root',
+        data: {
+            show: false,
+            m: 'see you',
+            list: [1,2,3]
+        },
+        methods: {
+            cc: function () {
+                this.show = !this.show
+            }
+
+        }
+    })
+</script>
+
+</body>
+</html>

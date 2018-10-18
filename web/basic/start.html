@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>start</title>
+    <script src="../../resource/vue.js"></script>
+</head>
+<body>
+    <div id="root">
+        <div>{{x}}</div>
+        <div v-text="xx"></div>
+        <div v-html="xxx"></div>
+    </div>
+
+    <div id="root2">
+        <div @click="handleClick">{{c}}</div>
+    </div>
+
+    <script>
+
+        new Vue({
+            el:"#root",
+            data: {
+                x: "hello!!!",
+                xx: "world!!!",
+                xxx: "<h1>haha</h1>"
+            }
+        });
+
+        new Vue({
+            el:'#root2',
+            data:{
+                c:'单击'
+            },
+            methods:{
+                handleClick:function () {
+                    alert("😀");
+                    this.c="哈哈😄"
+                }
+            }
+        })
+    </script>
+</body>
+</html>
