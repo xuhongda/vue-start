@@ -2,40 +2,47 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>start</title>
+    <title>start vue.js</title>
     <script src="../../resource/vue.js"></script>
 </head>
 <body>
-    <div id="root">
+    <div id="app">
         <div>{{x}}</div>
+        <!--object-->
+        <div>{{school.name + school.teacher}}</div>
+        <!--array-->
+        <div>{{city[0]}} {{city[1]}}</div>
+        <!--v 指令-->
         <div v-text="xx"></div>
         <div v-html="xxx"></div>
     </div>
 
-    <div id="root2">
-        <div @click="handleClick">{{c}}</div>
+    <div id="app2">
+        <div @click="handleClick">{{message}}</div>
     </div>
 
     <script>
 
         new Vue({
-            el:"#root",
+            el:"#app",
             data: {
                 x: "hello!!!",
+                school:{"name":"xu","teacher":"liu"},
+                city:["上海","北京","南昌"],
                 xx: "world!!!",
                 xxx: "<h1>haha</h1>"
             }
         });
 
         new Vue({
-            el:'#root2',
+            el:'#app2',
             data:{
-                c:'单击'
+                message:'单击'
             },
             methods:{
                 handleClick:function () {
                     alert("😀");
-                    this.c="哈哈😄"
+                    this.message="哈哈😄"
                 }
             }
         })

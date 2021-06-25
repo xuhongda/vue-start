@@ -9,8 +9,8 @@
 <div id="root">
     <div>{{message}}</div>
     <div>{{tt}}</div>
-    姓：<input v-model="firstName"/>
-    名：<input v-model="lastName"/>
+    姓：<label><input v-model="firstName"/></label>
+    名：<label><input v-model="lastName"/></label>
     <div>{{firstName}}{{lastName}}</div>
     <div>{{fullName}}</div>
     <div>{{count}}</div>
@@ -27,7 +27,7 @@
         /*计算属性*/
         computed: {
             fullName: function () {
-               return this.firstName+ "" + this.lastName;
+                return this.firstName + "" + this.lastName;
             },
             tt: function () {
                 return this.message.split('').reverse().join('')
