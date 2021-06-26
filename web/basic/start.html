@@ -2,8 +2,14 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>start vue.js</title>
+    <title>start</title>
     <script src="../../resource/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <style>
+        .active{
+            border: 3px solid rebeccapurple;
+        }
+    </style>
 </head>
 <body>
     <div id="app">
@@ -13,39 +19,140 @@
         <!--array-->
         <div>{{city[0]}} {{city[1]}}</div>
         <!--v 指令-->
-        <div v-text="xx"></div>
-        <div v-html="xxx"></div>
+        <div v-text="myText"></div>
+        <div v-html="myHtml"></div>
+        <!--v-show 操作display-->
+        <div v-show="isShow">v-show</div>
+        <div v-show="age > 18">v-show2</div>
+        <!--v-if 操作DOM-->
+        <div v-if="isShow">v-if</div>
     </div>
 
+    <!--绑定事件 v-on ;v-on 可用@ 代替 -->
     <div id="app2">
-        <div @click="handleClick">{{message}}</div>
+        <button v-on:dblclick="doIt">{{message2}}</button>
+        <button @click="handleClick">{{message}}</button>
+        <!--双向绑定-->
+        <label>
+            <input @keyup.enter="sayHi" v-model="message3"/> <!--回车事件-->
+        </label>
+        <p>{{message3}}</p>
     </div>
 
-    <script>
+    <!--属性元素 v-bind:属性名 -->
+    <div id="app3">
+        <img v-bind:src="imgSrc" :alt="imgAlt+'金晨'"/>
+        <img :src="imgSrc" :class="isActive?'active':''"  alt="xx"/>
+        <!--对象表达式-->
+        <img :src="imgSrc" :class="{active:isActive}"  alt="xx"/>
+    </div>
 
+  <!-- v-for -->
+    <div id="app4">
+        <input type="button" @click="addClick" value="添加">
+        <input type="button" @click="dClick" value="减少">
+        <ul>
+            <li v-for="item in arr" >{{item}}你好</li>
+            <li v-for="(item,index) in arr" v-text="index+''+item">你好</li>
+        </ul>
+    </div>
+
+    <!--axios-->
+    <div id="app5">
+        <input type="button" @click="click" value="点击">
+        <p>{{message}}</p>
+    </div>
+
+    <!-- javaScript -->
+    <script>
         new Vue({
             el:"#app",
             data: {
                 x: "hello!!!",
                 school:{"name":"xu","teacher":"liu"},
                 city:["上海","北京","南昌"],
-                xx: "world!!!",
-                xxx: "<a href='https://cn.vuejs.org/'>vue.js 教程</a>"
+                myText: "world!!!",
+                myHtml: "<a href='https://cn.vuejs.org/'> vue.js 教程</a>",
+                isShow:true,
+                age: 20
             }
         });
 
         new Vue({
             el:'#app2',
             data:{
-                message:'单击'
+                message:'单击',
+                message2:'双击',
+                message3:'你好'
             },
             methods:{
                 handleClick:function () {
-                    alert("😀");
-                    this.message="哈哈😄"
+                    if (this.message === '单击'){
+                        alert("ok");
+                    }
+                    this.message="ok"
+                },
+                doIt:function (){
+                    alert("db click");
+                    this.message+="db click"
+                },
+                sayHi:function (){
+                    let value = this.message3;
+                    alert("hello!"+value)
                 }
             }
         })
+
+        new Vue({
+            el:'#app3',
+            data:{
+                imgSrc:'https://img0.baidu.com/it/u=3822175387,1946629824&fm=26&fmt=auto&gp=0.jpg',
+                imgAlt:'哈哈',
+                isActive: true
+            },
+            methods:{
+
+            }
+        })
+
+        new Vue({
+            el:'#app4',
+            data:{
+              arr:[1,2,3]
+            },
+            methods:{
+                addClick:function (){
+                    this.arr.push(4)
+                },
+                dClick:function (){
+                    this.arr.shift() //删除最左
+                    //this.arr.pop()  //删除最右
+                }
+            }
+        })
+
+        new Vue({
+            el:'#app5',
+            data:{
+                message:[1,2,3],
+            },
+            methods:{
+                click:function (){
+                    // this 在 axios 内会改变
+                    var that = this;
+                    /*axios 成功第一个回调；失败第二个回调*/
+                    axios.get("").then(function (response){
+                        console.log(response);
+                        that.message = response;
+                    },function (err){
+                        console.log(err)
+                        that.message = err;
+                    })
+                }
+            }
+        })
+
+
     </script>
 </body>
 </html>
