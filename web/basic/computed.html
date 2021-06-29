@@ -8,7 +8,7 @@
 <body>
 <div id="root">
     <div>{{message}}</div>
-    <div>{{tt}}</div>
+    <div>{{reverse}}</div>
     姓：<label><input v-model="firstName"/></label>
     名：<label><input v-model="lastName"/></label>
     <div>{{firstName}}{{lastName}}</div>
@@ -29,8 +29,11 @@
             fullName: function () {
                 return this.firstName + "" + this.lastName;
             },
-            tt: function () {
+            reverse: function () {
                 return this.message.split('').reverse().join('')
+            },
+            message: function (){
+                return Date.now()
             }
         },
         /*侦听器*/

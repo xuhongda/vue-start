@@ -8,9 +8,11 @@
 <body>
 <div id="root">
     {{m}}
-    </br>
-    <input v-model="inputValue">
-    <button @click="c">add</button>
+    <br>
+    <label>
+        <input v-model="inputValue">
+    </label>
+    <button @click="add">add</button>
     <ul>
         <li v-for="(item,index) of list" :key="index">
             {{item}}
@@ -27,7 +29,7 @@
             list: []
         },
         methods: {
-            c: function () {
+            add: function () {
                 this.list.push(this.inputValue);
                 this.inputValue = ''
             }
