@@ -42,11 +42,13 @@
 
     <!--属性元素 v-bind:属性名 -->
     <div id="app3">
+        <p :style="myStyle">myStyle</p>
+        <div v-bind:[abc]="myStyle">你好</div> //vue 2.6 以上
+
         <img v-bind:src="imgSrc" :alt="imgAlt+'金晨'"/>
         <img :src="imgSrc" :class="isActive?'active':''"  alt="xx"/>
         <!--对象表达式-->
         <img :src="imgSrc" :class="{active:isActive}"  alt="xx"/>
-        <p :style="myStyle">myStyle</p>
     </div>
 
   <!-- v-for -->
@@ -114,6 +116,8 @@
                 myStyle:{
                     color:'red',
                 },
+                abc: 'style',
+
             },
 
             methods:{
@@ -155,6 +159,12 @@
                         that.message = err;
                     })
                 }
+            },
+            created: function (){
+                console.log(" create ")
+            },
+            update:function (){
+                console.log(" update ")
             }
         })
 
