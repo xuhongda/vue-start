@@ -52,8 +52,8 @@
         <input type="button" @click="addClick" value="添加">
         <input type="button" @click="dClick" value="减少">
         <ul>
-            <li v-for="item in arr" >{{item}}你好</li>
-            <li v-for="(item,index) in arr" v-text="index+''+item">你好</li>
+            <li v-for="item in arr" >{{item}} 你好</li>
+            <li v-for="(item,index) in arr" v-text="index+' '+item">你好</li>
         </ul>
     </div>
 
@@ -118,7 +118,7 @@
         new Vue({
             el:'#app4',
             data:{
-              arr:[1,2,3]
+              arr:['小明','小王','小红']
             },
             methods:{
                 addClick:function (){
