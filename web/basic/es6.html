@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>es6 start</title>
+</head>
+<body>
+
+<script>
+
+    if (1 > 0) {
+        //常量 块级作用域
+        const me = "xuhongda";
+        console.log(me);
+    }
+
+    const esObj = {
+        "name": "xuhongda", "age": 18, ex: ['es5', 'es6']
+    }
+    Object.freeze(esObj); //冻结
+
+    myFreeze(esObj);
+    esObj.ex[0] = 'es9';
+    console.log(esObj.ex[0])
+
+    //深层次冻结方法
+    function myFreeze(obj) {
+        Object.freeze(obj);
+        Object.keys(obj).forEach(key => {
+            if (typeof obj[key] === "object") {
+                myFreeze(obj[key])
+            }
+        })
+    }
+
+
+    function sum(x,y){
+      console.log(arguments); // => 不能输出 arguments
+      console.log(x+y);
+    }
+    sum(1,2);
+
+    /*解构赋值*/
+    const course = {
+      name:"xuhd",
+      age:18,
+      teacher:{
+        name: 'liu',age: 33
+      }
+    }
+    const {
+      name:courseName, //别名
+      age:courseAge,
+      teacher :{name,age}
+    } = course;
+    console.log(courseName , courseAge,name, age);
+
+    //const array = [1,2,3];
+   // const [a,b,c] = array;
+    const [a,b,c] = [1,2,3];
+    console.log(a,b,c);
+
+
+</script>
+</body>
+</html>

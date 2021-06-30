@@ -27,7 +27,7 @@
         /*计算属性*/
         computed: {
             fullName: function () {
-                return this.firstName + "" + this.lastName;
+                return this.firstName + " " + this.lastName;  //包含的任意值变化都会返回变化
             },
             reverse: function () {
                 return this.message.split('').reverse().join('')
@@ -38,7 +38,7 @@
         },
         /*侦听器*/
         watch: {
-            fullName: function () {
+            fullName: function () { //监听 fullName
                 this.count++
             }
         }

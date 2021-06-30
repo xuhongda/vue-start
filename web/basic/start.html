@@ -26,6 +26,7 @@
         <div v-show="age > 18">v-show2</div>
         <!--v-if 操作DOM-->
         <div v-if="isShow">v-if</div>
+        <div v-else>v-else</div>
     </div>
 
     <!--绑定事件 v-on ;v-on 可用@ 代替 -->
@@ -45,6 +46,7 @@
         <img :src="imgSrc" :class="isActive?'active':''"  alt="xx"/>
         <!--对象表达式-->
         <img :src="imgSrc" :class="{active:isActive}"  alt="xx"/>
+        <p :style="myStyle">myStyle</p>
     </div>
 
   <!-- v-for -->
@@ -73,7 +75,7 @@
                 city:["上海","北京","南昌"],
                 myText: "world!!!",
                 myHtml: "<a href='https://cn.vuejs.org/'> vue.js 教程</a>",
-                isShow:true,
+                isShow:false,
                 age: 20
             }
         });
@@ -108,8 +110,12 @@
             data:{
                 imgSrc:'https://img0.baidu.com/it/u=3822175387,1946629824&fm=26&fmt=auto&gp=0.jpg',
                 imgAlt:'哈哈',
-                isActive: true
+                isActive: true,
+                myStyle:{
+                    color:'red',
+                },
             },
+
             methods:{
 
             }
