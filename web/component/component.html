@@ -13,7 +13,21 @@
     <button-counter></button-counter>
 </div>
 
+<div id="xx">
+    <html-t></html-t>
+</div>
+
 <script>
+
+    const childComponent ={
+        data: function () { //data 必须是一个函数
+            return {
+                message: "独立子组件"
+            }
+        },
+        template: `<div>{{message}}</div>`,
+    }
+
     // 定义一个名为 button-counter 的新组件
     Vue.component('button-counter', {
         data: function () { //data 必须是一个函数
@@ -21,10 +35,35 @@
                 count: 0
             }
         },
-        template: '<button v-on:click="count++">You clicked me {{ count }} times.</button>'
+        template: '<div><button v-on:click="count++">You clicked me {{ count }} times.</button><html-child></html-child> </div>',
+        components: {
+            'html-child': childComponent,
+        }
+    })
+
+
+
+    Vue.component('html-t', {
+        data: function () { //data 必须是一个函数
+            return {
+                count: 0
+            }
+        },
+        template: `<div><div>你好</div> <html-child></html-child></div>`,
+        components: {
+            'html-child':{
+                data: function () { //data 必须是一个函数
+                    return {
+                        message: "子组件"
+                    }
+                },
+                template: `<div>{{message}}</div>`,
+            }
+        }
     })
 
     new Vue({ el: '#components-demo' })
+    new Vue({ el: '#xx' })
 </script>
 </body>
 </html>
