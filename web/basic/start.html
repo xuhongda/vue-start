@@ -149,11 +149,11 @@
             methods:{
                 click:function (){
                     // this 在 axios 内会改变
-                    var that = this;
+                    let that = this;
                     /*axios 成功第一个回调；失败第二个回调*/
-                    axios.get("").then(function (response){
-                        console.log(response);
-                        that.message = response;
+                    axios.get("").then(function (res){
+                        console.log(res);
+                        that.message = res;
                     },function (err){
                         console.log(err)
                         that.message = err;
@@ -167,8 +167,6 @@
                 console.log(" update ")
             }
         })
-
-
     </script>
 </body>
 </html>

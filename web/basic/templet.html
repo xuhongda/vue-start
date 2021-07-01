@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>template</title>
+</head>
+<body>
+
+<div id="app">
+
+  <template v-if="flag">
+    <label for="reg">
+      注册：<input type="text" id="reg" v-model="reg"/>
+    </label>
+  </template>
+
+
+  <template v-else>
+    <label for="login">
+     登录： <input type="text" id="login" v-model="login"/>
+    </label>
+  </template>
+
+  <input type="button" value="切换" @click="toggle">
+
+</div>
+
+
+
+ <script src="../../resource/vue.js"></script>
+ <script>
+
+   new Vue({
+     el:'#app',
+     data:{
+       flag: false,
+       login:'',
+       reg:''
+     },
+     methods:{
+       toggle:function (){
+         this.flag = !this.flag;
+       }
+     },
+
+   })
+
+ </script>
+
+</body>
+</html>
