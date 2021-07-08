@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>component</title>
+
+</head>
+<body>
+
+<!--夫传子组件-->
+
+<div id="app">
+    <html-p :m-city="city"></html-p>
+</div>
+<script src="../../resource/vue.js"></script>
+<script>
+
+    const childComponent ={
+        data: function () {
+            return {
+                message: "独立子组件"
+            }
+        },
+        props: {
+            mCount:Number
+        },
+        template: `<div>{{message}}<h1>{{mCount}}</h1></div>`,
+    }
+
+
+    Vue.component('html-p', {
+        data: function () { //data 必须是一个函数
+            return {
+                count: 0
+            }
+        },
+        props:{
+            mCity:Array
+        },
+        template: `<div><html-child :m-count="count"></html-child><h2><li v-for="item in mCity">{{item}}</li></h2></div>`,
+        components: {
+            'html-child':childComponent
+        }
+    })
+
+
+    new Vue({ el: '#app',data:{
+        city:['bj','sh']
+        } })
+</script>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>c-3</title>
+</head>
+<body>
+<!--子组件向父组件传值-->
+<div id="app">
+  <cpn v-on:listen-child-event="childData"></cpn>
+  <ul>
+    <li v-for="item in message">{{item}}</li>
+  </ul>
+</div>
+
+<template id="cpn">
+  <div>
+    <h1>组件</h1>
+    <button @click="cClick">向父组件传值</button>
+  </div>
+</template>
+<script src="../../resource/vue.js"></script>
+<script>
+
+  const cpn ={
+    template:'#cpn',
+    data:function (){
+      return{
+        animal:['pig','cat']
+      }
+    },
+    methods:{
+      cClick(){
+        this.$emit('listen-child-event',this.animal)
+      }
+    }
+  }
+
+  new Vue({
+    el:"#app",
+    components:{
+      cpn
+    },
+    data:{
+      message:['x','y','z']
+    },
+    methods: {
+      childData(data){
+        console.log(data)
+        console.log(data[0])
+        this.message = data;
+      }
+    }
+  })
+</script>
+
+</body>
+</html>
