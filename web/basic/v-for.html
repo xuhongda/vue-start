@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>for</title>
+</head>
+<body>
+<div id="app">
+    <input type="button" @click="add" value="点击" >
+    <ul>
+        <li v-for="item in list">{{item}}</li>
+    </ul>
+</div>
+<script src="../../resource/vue.js"></script>
+<script>
+    new Vue({
+        el:"#app",
+        data:{
+            list:['a','b','c']
+        },
+        methods:{
+            add(){
+                var v = this;
+                setTimeout(function (){
+                    v.list = ['1','2','3']
+                },300);
+                //this.list = ['1','2','3']
+            }
+        },
+        created(){
+            console.log(this.list)
+
+
+
+        }
+    })
+</script>
+</body>
+</html>
