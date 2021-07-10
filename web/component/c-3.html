@@ -2,57 +2,49 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>c-3</title>
+  <script src="../../resource/vue.js"></script>
 </head>
-<body>
-<!--子组件向父组件传值-->
+
 <div id="app">
-  <cpn v-on:listen-child-event="childData"></cpn>
-  <ul>
-    <li v-for="item in message">{{item}}</li>
-  </ul>
+  <cpn :easy="message" ></cpn>  <!--子组件在父组件使用-->
 </div>
 
 <template id="cpn">
   <div>
-    <h1>组件</h1>
-    <button @click="cClick">向父组件传值</button>
+    <h1>CPN</h1>
+    <ul>
+      <li v-for="(item,index) in easy">{{(index+1) +':'+item}}</li>
+    </ul>
+    {{diff}}
   </div>
 </template>
-<script src="../../resource/vue.js"></script>
+
+<body>
 <script>
 
-  const cpn ={
-    template:'#cpn',
-    data:function (){
-      return{
-        animal:['pig','cat']
-      }
-    },
-    methods:{
-      cClick(){
-        this.$emit('listen-child-event',this.animal)
+  const  cpn = {
+    template:`#cpn`,
+    props: {
+      easy:{
+        type:Array,
+        default(){
+
+        }
       }
     }
   }
 
   new Vue({
     el:"#app",
-    components:{
-      cpn
-    },
     data:{
-      message:['x','y','z']
+      message:['a','b','c'],
+      info:'hello!'
     },
-    methods: {
-      childData(data){
-        console.log(data)
-        console.log(data[0])
-        this.message = data;
-      }
+    components: {
+      cpn
     }
   })
-</script>
 
+</script>
 </body>
 </html>

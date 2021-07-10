@@ -2,51 +2,54 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>component</title>
-
+    <title>c-2</title>
+    <script src="../../resource/vue.js"></script>
 </head>
-<body>
-
-<!--夫传子组件-->
 
 <div id="app">
-    <html-p :m-city="city"></html-p>
+  <cpn :easy="message" :diff="info"></cpn>  <!--子组件在父组件使用-->
 </div>
-<script src="../../resource/vue.js"></script>
+
+<template id="cpn">
+  <div>
+    <h1>CPN</h1>
+    <ul>
+      <li v-for="(item,index) in easy">{{(index+1) +':'+item}}</li>
+    </ul>
+   {{diff}}
+  </div>
+</template>
+
+<body>
 <script>
 
-    const childComponent ={
-        data: function () {
-            return {
-                message: "独立子组件"
-            }
-        },
-        props: {
-            mCount:Number
-        },
-        template: `<div>{{message}}<h1>{{mCount}}</h1></div>`,
-    }
-
-
-    Vue.component('html-p', {
-        data: function () { //data 必须是一个函数
-            return {
-                count: 0
-            }
-        },
-        props:{
-            mCity:Array
-        },
-        template: `<div><html-child :m-count="count"></html-child><h2><li v-for="item in mCity">{{item}}</li></h2></div>`,
-        components: {
-            'html-child':childComponent
+  const  cpn = {
+    template:`#cpn`,
+    props: {
+      easy:{
+        type:Array,
+        default(){
+          return []
         }
-    })
+      },
+      diff: {
+        type:String,
+        default:'olleh'
+      }
+    }
+  }
 
+  new Vue({
+    el:"#app",
+    data:{
+      message:['a','b','c'],
+      info:'hello!'
+    },
+    components: {
+     cpn
+    }
+  })
 
-    new Vue({ el: '#app',data:{
-        city:['bj','sh']
-        } })
 </script>
 </body>
 </html>

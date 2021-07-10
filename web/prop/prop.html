@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>prop</title>
+    <script src="../../resource/vue.js"></script>
+</head>
+<body>
+
+<div id="xx">
+    <html-t text="world"></html-t>
+</div>
+
+<script>
+
+    const childComponent = {
+        data: function () { //data 必须是一个函数
+            return {
+                message: "独立子组件"
+            }
+        },
+        template: `
+          <div>{{ message }}</div>`,
+        props: ['text']
+    }
+
+
+    Vue.component('html-t', {
+        data: function () { //data 必须是一个函数
+            return {
+                count: 0
+            }
+        },
+        template: `
+          <div>
+          <div>你好</div>
+          <html-child></html-child>
+          </div>`,
+        components: { //子组件
+            'html-child': childComponent,
+        }
+    })
+
+    new Vue({el: '#xx'})
+</script>
+</body>
+</html>
